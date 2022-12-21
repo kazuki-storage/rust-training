@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  # rust
+  rust:
+    build:
+      context: .
+      dockerfile: "dockerfile"
+    volumes:
+      - .:/rust
+    tty: true
+    ports:
+      - 3000:3000
+  # database
+  mysql:
+    image: mysql:8
+    volumes:
+      - ./db:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
